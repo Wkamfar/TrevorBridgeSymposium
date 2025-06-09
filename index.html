@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bridge Project Summary</title>
+    <!-- Placeholder Favicon (Bridge Emoji) -->
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🌉</text></svg>">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;700&family=Noto+Sans+JP:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            -webkit-tap-highlight-color: transparent;
+        }
+        .nav-link {
+            @apply px-3 py-2 text-gray-400 hover:text-white rounded-md transition-colors text-sm font-medium;
+        }
+        .dropdown-link.active, .mobile-link.active {
+             @apply bg-indigo-600 text-white;
+        }
+        .page {
+            display: none;
+        }
+        .page.active {
+            display: block;
+        }
+        .kanji-game button {
+            @apply bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-2 rounded-lg transition-transform transform hover:scale-105 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-offset-gray-800 focus:ring-indigo-500;
+        }
+        .kanji-game .correct { @apply bg-green-500 hover:bg-green-600; }
+        .kanji-game .incorrect { @apply bg-red-500 hover:bg-red-600; }
+        .aspect-w-16 { position: relative; padding-bottom: 56.25%; }
+        .aspect-h-9 { height: 0; }
+        .aspect-w-16 > * { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+        .gemini-button {
+             @apply mt-4 inline-flex items-center justify-center bg-purple-600 hover:bg-purple-700 text-white font-bold py-2 px-4 rounded-lg transition-colors disabled:bg-gray-500;
+        }
+         .loader {
+            width: 20px; height: 20px; border: 2px solid #FFF; border-bottom-color: transparent;
+            border-radius: 50%; display: inline-block; box-sizing: border-box;
+            animation: rotation 1s linear infinite; margin-left: 8px;
+        }
+        @keyframes rotation {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body class="bg-gray-900 text-gray-200">
+
+    <!-- Navigation -->
+    <nav class="bg-gray-800/80 backdrop-blur-md p-4 sticky top-0 z-50 shadow-lg">
+        <div class="container mx-auto flex justify-between items-center">
+            <h1 class="text-xl font-bold text-white">Bridge Project</h1>
+            
+            <div class="hidden md:block relative">
+                <button id="desktop-menu-button" class="flex items-center space-x-2 px-3 py-2 text-gray-300 hover:text-white hover:bg-gray-700 rounded-md transition-colors text-sm font-medium">
+                    <span>Menu</span>
+                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
+                </button>
+                <div id="desktop-menu-dropdown" class="hidden absolute right-0 mt-2 w-48 bg-gray-700 rounded-md shadow-lg py-1 z-50">
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 dropdown-link active" onclick="showPage('summary')">Summary</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 dropdown-link" onclick="showPage('japan')">Japanese Immersion</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 dropdown-link" onclick="showPage('gamedev')">Game Development</a>
+                    <a href="#" class="block px-4 py-2 text-sm text-gray-200 hover:bg-gray-600 dropdown-link" onclick="showPage('hackathon')">Hackathon</a>
+                </div>
+            </div>
+
+            <button class="md:hidden text-white focus:outline-none" id="mobile-menu-button">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
+        </div>
+        <div class="hidden md:hidden" id="mobile-menu-panel">
+             <div class="px-2 pt-2 pb-3 space-y-1">
+                 <a href="#" class="block nav-link mobile-link active" onclick="showPage('summary', true)">Summary</a>
+                 <a href="#" class="block nav-link mobile-link" onclick="showPage('japan', true)">Japanese Immersion</a>
+                 <a href="#" class="block nav-link mobile-link" onclick="showPage('gamedev', true)">Game Development</a>
+                 <a href="#" class="block nav-link mobile-link" onclick="showPage('hackathon', true)">Hackathon</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container mx-auto p-4 md:p-8">
+
+        <!-- Page 1: Summary -->
+        <div id="summary" class="page active">
+            <div class="bg-gray-800/50 p-6 md:p-8 rounded-xl shadow-2xl animate-fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">The Bridge Project: A Journey of Growth</h2>
+                <p class="text-base md:text-lg text-gray-300 leading-relaxed">
+                    "Bridge" was a unique three-month period from my school, providing a remarkable opportunity to step away from the traditional classroom setting and pursue self-directed learning. This project was designed to foster personal growth, allowing me to delve into areas of passion, develop new skills, and take ownership of my education. It was a time for exploration, experimentation, and significant personal and intellectual development.
+                </p>
+
+                <!-- Navigation Buttons -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mt-10">
+                    <a href="#" onclick="showPage('japan')" class="relative block group rounded-lg overflow-hidden shadow-lg h-48">
+                        <img src="Wave.jpg" alt="Japanese Scenery" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center p-4">
+                            <h3 class="text-2xl font-bold text-white opacity-90 group-hover:opacity-100 transform group-hover:scale-105 transition-all duration-300 text-center">Japanese Immersion</h3>
+                        </div>
+                    </a>
+                    <a href="#" onclick="showPage('gamedev')" class="relative block group rounded-lg overflow-hidden shadow-lg h-48">
+                        <img src="GameDev.jpg" alt="Game Development" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center p-4">
+                            <h3 class="text-2xl font-bold text-white opacity-90 group-hover:opacity-100 transform group-hover:scale-105 transition-all duration-300 text-center">Game Development</h3>
+                        </div>
+                    </a>
+                    <a href="#" onclick="showPage('hackathon')" class="relative block group rounded-lg overflow-hidden shadow-lg h-48">
+                        <img src="Hackathon.jpg" alt="Hackathon Event" class="w-full h-full object-cover transform group-hover:scale-110 transition-transform duration-300">
+                        <div class="absolute inset-0 bg-black bg-opacity-40 group-hover:bg-opacity-60 transition-all duration-300 flex items-center justify-center p-4">
+                            <h3 class="text-2xl font-bold text-white opacity-90 group-hover:opacity-100 transform group-hover:scale-105 transition-all duration-300 text-center">Hackathon</h3>
+                        </div>
+                    </a>
+                </div>
+
+                <!-- About Me Section -->
+                <div class="mt-12 bg-gray-800/60 p-6 md:p-8 rounded-xl shadow-inner">
+                    <h2 class="text-3xl font-bold mb-6 text-white text-center">About Me</h2>
+                    <div class="flex flex-col md:flex-row items-center gap-8">
+                        <div class="md:w-1/3 flex-shrink-0">
+                            <img src="MeImage.jpg" alt="A photo of me" class="rounded-full shadow-lg mx-auto w-48 h-48 md:w-56 md:h-56 object-cover">
+                        </div>
+                        <div class="md:w-2/3">
+                            <p class="text-lg text-gray-300 leading-relaxed text-center md:text-left">
+                                Hello! My name is William Kamfar, and I'm a passionate learner and creator. This Bridge project was an incredible chance for me to explore my interests in Japanese culture, software development, and community building. When I'm not coding or studying, you can find me watching movies and tv shows with my little sister. This portfolio is a snapshot of my journey, and I'm excited to share what I've learned.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 2: Japanese Cultural Immersion -->
+        <div id="japan" class="page">
+            <div class="bg-gray-800/50 p-6 md:p-8 rounded-xl shadow-2xl animate-fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Japanese Cultural Immersion</h2>
+                <p class="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
+                   During my Bridge project, I dedicated a significant portion of my time to a deep dive into Japanese language and culture. This wasn't just about textbook learning; it was about experiencing the culture from various angles. I practiced conversational Japanese daily, explored traditional arts like calligraphy, and studied the nuances of Japanese etiquette and history. This journey enhanced my linguistic skills and gave me a profound appreciation for the depth and beauty of Japanese culture.
+                </p>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                    <img src="JapanImage4.jpg" alt="Japanese Immersion Placeholder" class="rounded-lg shadow-lg w-full h-auto object-cover aspect-square">
+                    <img src="JapanImage3.jpg" alt="Japanese Immersion Placeholder" class="rounded-lg shadow-lg w-full h-auto object-cover aspect-square">
+                    <img src="JapanImage5.jpg" alt="Japanese Immersion Placeholder" class="rounded-lg shadow-lg w-full h-auto object-cover aspect-square">
+                    <img src="JapanImage1.jpg" alt="Japanese Immersion Placeholder" class="rounded-lg shadow-lg w-full h-auto object-cover aspect-square">
+                </div>
+                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">
+                    <div class="bg-gray-800/60 p-6 rounded-lg shadow-inner">
+                        <h3 class="text-2xl font-bold mb-3 text-white">Cultural Fun Facts</h3>
+                        <div id="fun-fact-content" class="min-h-[120px]">
+                            <p class="text-gray-300 mb-2">In Japan, instead of saying "I love you" directly, the famous novelist Natsume Sōseki suggested a more subtle, poetic translation: <strong class="text-indigo-300">「月が綺麗ですね」(Tsuki ga kirei desu ne)</strong>.</p>
+                            <p class="text-gray-400 text-sm">It literally means "The moon is beautiful, isn't it?" and implies a shared, quiet moment of deep affection. This captures a cultural preference for expressing emotions indirectly.</p>
+                        </div>
+                         <button id="fun-fact-button" class="gemini-button" onclick="generateFunFact()">
+                            ✨ Generate New Fact
+                            <span id="fun-fact-loader" class="hidden loader"></span>
+                        </button>
+                    </div>
+                     <div class="bg-gray-800/60 p-6 rounded-lg shadow-inner flex flex-col">
+                        <h3 class="text-2xl font-bold mb-4 text-white text-center">Immersion Playlist</h3>
+                        <iframe style="border-radius:12px" src="https://open.spotify.com/embed/playlist/6WPHB1aw5f9wBAIxdJaqsM?utm_source=generator" width="100%" height="152" frameBorder="0" allowfullscreen="" allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture" loading="lazy"></iframe>
+                    </div>
+                </div>
+                <div class="bg-gray-800/60 p-6 rounded-lg shadow-inner kanji-game">
+                    <h3 class="text-2xl md:text-3xl font-bold mb-4 text-center text-white">Mini Kanji Game</h3>
+                    <p class="text-center text-gray-400 mb-6">Test your knowledge! What does this Kanji mean?</p>
+                    <div id="kanji-display" class="text-7xl md:text-9xl font-bold text-center mb-6 text-indigo-300" style="font-family: 'Noto Sans JP', sans-serif;"></div>
+                    <div id="options-container" class="grid grid-cols-2 md:grid-cols-4 gap-3 md:gap-4 max-w-3xl mx-auto"></div>
+                    <div id="feedback" class="text-center mt-4 text-lg md:text-xl font-semibold h-8"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 3: Game Development -->
+        <div id="gamedev" class="page">
+            <div class="bg-gray-800/50 p-6 md:p-8 rounded-xl shadow-2xl animate-fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Project: Game Development</h2>
+                <p class="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
+                    Another major focus of my Bridge project was mastering game development because I had been involved with the field since middle school, but I never managed to finish something completely. I challenged myself to build a complete game from the ground up, which involved strengthening my ability in programming languages like C# and learning new languages, like HLSL, understanding game engines such as Unity, and exploring principles of game design and asset creation. This hands-on experience was incredibly rewarding, teaching me persistence, problem-solving, and the intricate process of bringing an interactive world to life.
+                </p>
+                 <div class="bg-gray-800/60 p-6 rounded-lg shadow-inner mb-8 text-center">
+                    <h3 class="text-2xl font-bold mb-3 text-white">Need Inspiration?</h3>
+                    <p class="text-gray-300 mb-4">Let AI brainstorm a game concept for you.</p>
+                    <button id="game-idea-button" class="gemini-button" onclick="generateGameIdea()">
+                        ✨ Generate Game Idea
+                        <span id="game-idea-loader" class="hidden loader"></span>
+                    </button>
+                    <div id="game-idea-output" class="text-left mt-4 p-4 bg-gray-900/50 rounded-lg min-h-[50px]"></div>
+                </div>
+                <div class="mb-8">
+                    <h3 class="text-2xl font-bold mb-4 text-white">Gameplay Showcase</h3>
+                    <div class="aspect-w-16 aspect-h-9 bg-black rounded-lg overflow-hidden shadow-lg">
+                        <video controls poster="GameThumbnail.png" class="w-full h-full object-contain">
+                            <source src="GamePreview.mp4" type="video/mp4">
+                            Your browser does not support the video tag.
+                        </video>
+                    </div>
+                </div>
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
+                    <img src="GameImage1.png" alt="Placeholder Image for Game Dev" class="rounded-lg shadow-lg">
+                    <img src="GameImage2.png" alt="Placeholder Image for Game Dev" class="rounded-lg shadow-lg">
+                </div>
+            </div>
+        </div>
+
+        <!-- Page 4: Hackathon -->
+        <div id="hackathon" class="page">
+             <div class="bg-gray-800/50 p-6 md:p-8 rounded-xl shadow-2xl animate-fade-in">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4 text-white">Organizing the Trevor Day School Hackathon</h2>
+                <p class="text-base md:text-lg text-gray-300 leading-relaxed mb-6">
+                    As a culmination of my focus on technology and community, I took on the challenge of organizing Trevor Day School's first-ever student-led hackathon. This involved everything from initial planning and securing sponsorships to marketing the event, mentoring participants, and managing logistics on the day. It was a demanding but fulfilling experience that taught me leadership, project management, and the power of collaborative innovation.
+                </p>
+                 
+                <div class="text-center mb-8">
+                     <a href="https://wkamfar.github.io/HackathonWebsite/" class="inline-block bg-indigo-500 hover:bg-indigo-600 text-white font-bold py-3 px-8 rounded-lg transition-colors text-lg">
+                        Visit the Hackathon Website
+                    </a>
+                </div>
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                     <img src="Hackathon1.jpg" alt="Placeholder Image for Hackathon" class="rounded-lg shadow-lg object-cover w-full h-full">
+                     <img src="Hackathon2.jpg" alt="Placeholder Image for Hackathon" class="rounded-lg shadow-lg object-cover w-full h-full">
+                     <img src="HackathonSubmission.jpg" alt="Placeholder Image for Hackathon" class="rounded-lg shadow-lg object-cover w-full h-full">
+                     <img src="HackathonWorking.jpg" alt="Placeholder Image for Hackathon" class="rounded-lg shadow-lg object-cover w-full h-full">
+                </div>
+                <div class="bg-gray-800/60 p-6 rounded-lg shadow-inner mb-8">
+                    <h3 class="text-2xl font-bold mb-3 text-white text-center">Hackathon Idea Brainstormer</h3>
+                    <div class="flex flex-col sm:flex-row gap-2 items-center justify-center">
+                        <input type="text" id="hackathon-theme" placeholder="Enter a theme (e.g., education)" class="bg-gray-700 text-white rounded-md px-3 py-2 w-full sm:w-auto flex-grow focus:outline-none focus:ring-2 focus:ring-purple-500">
+                        <button id="hackathon-idea-button" class="gemini-button w-full sm:w-auto" onclick="generateHackathonIdea()">
+                            ✨ Brainstorm Ideas
+                            <span id="hackathon-idea-loader" class="hidden loader"></span>
+                        </button>
+                    </div>
+                    <div id="hackathon-idea-output" class="text-left mt-4 p-4 bg-gray-900/50 rounded-lg min-h-[100px] whitespace-pre-wrap"></div>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <script>
+        // --- Navigation ---
+        const pages = document.querySelectorAll('.page');
+        const mobileNavLinks = document.querySelectorAll('#mobile-menu-panel .mobile-link');
+        const desktopDropdownLinks = document.querySelectorAll('#desktop-menu-dropdown .dropdown-link');
+
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenuPanel = document.getElementById('mobile-menu-panel');
+        
+        const desktopMenuButton = document.getElementById('desktop-menu-button');
+        const desktopMenuDropdown = document.getElementById('desktop-menu-dropdown');
+
+        function showPage(pageId, isMobile = false) {
+            pages.forEach(page => page.classList.remove('active'));
+            const newPage = document.getElementById(pageId);
+            if(newPage) newPage.classList.add('active');
+
+            // Update mobile nav links
+            mobileNavLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick').includes(`'${pageId}'`)) {
+                    link.classList.add('active');
+                }
+            });
+
+            // Update desktop dropdown links
+            desktopDropdownLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('onclick').includes(`'${pageId}'`)) {
+                    link.classList.add('active');
+                }
+            });
+
+             if (isMobile) {
+                mobileMenuPanel.classList.add('hidden');
+            }
+            if (desktopMenuDropdown) {
+                desktopMenuDropdown.classList.add('hidden');
+            }
+        }
+
+        mobileMenuButton.addEventListener('click', (event) => {
+            event.stopPropagation();
+            mobileMenuPanel.classList.toggle('hidden');
+            if (desktopMenuDropdown) desktopMenuDropdown.classList.add('hidden');
+        });
+        
+        if (desktopMenuButton) {
+            desktopMenuButton.addEventListener('click', (event) => {
+                event.stopPropagation();
+                desktopMenuDropdown.classList.toggle('hidden');
+                mobileMenuPanel.classList.add('hidden');
+            });
+        }
+        
+        window.addEventListener('click', () => {
+            if (!mobileMenuPanel.classList.contains('hidden')) {
+                mobileMenuPanel.classList.add('hidden');
+            }
+            if (desktopMenuDropdown && !desktopMenuDropdown.classList.contains('hidden')) {
+                desktopMenuDropdown.classList.add('hidden');
+            }
+        });
+
+
+        // --- Kanji Game Logic ---
+        const kanjiGameData = [
+            { kanji: '水', meaning: 'Water' }, { kanji: '火', meaning: 'Fire' },
+            { kanji: '木', meaning: 'Tree' }, { kanji: '土', meaning: 'Earth' },
+            { kanji: '金', meaning: 'Gold' }, { kanji: '日', meaning: 'Sun' },
+            { kanji: '月', meaning: 'Moon' }, { kanji: '人', meaning: 'Person' },
+            { kanji: '力', meaning: 'Power' }, { kanji: '山', meaning: 'Mountain' },
+            { kanji: '川', meaning: 'River' }, { kanji: '田', meaning: 'Rice Field' },
+            { kanji: '女', meaning: 'Woman' }, { kanji: '男', meaning: 'Man' },
+            { kanji: '見', meaning: 'To See' }, { kanji: '食', meaning: 'To Eat' },
+            { kanji: '飲', meaning: 'To Drink' }, { kanji: '東', meaning: 'East' },
+            { kanji: '西', meaning: 'West' }, { kanji: '南', meaning: 'South' },
+            { kanji: '北', meaning: 'North' }, { kanji: '上', meaning: 'Up' },
+            { kanji: '下', meaning: 'Down' }, { kanji: '中', meaning: 'Middle' },
+            { kanji: '大', meaning: 'Big' }, { kanji: '小', meaning: 'Small' },
+            { kanji: '学', meaning: 'To Learn' }, { kanji: '生', meaning: 'Life' },
+            { kanji: '先', meaning: 'Ahead' }, { kanji: '何', meaning: 'What' }
+        ];
+
+        const kanjiDisplay = document.getElementById('kanji-display');
+        const optionsContainer = document.getElementById('options-container');
+        const feedback = document.getElementById('feedback');
+        let currentKanji;
+
+        function shuffleArray(array) {
+            for (let i = array.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [array[i], array[j]] = [array[j], array[i]];
+            }
+        }
+
+        function setupKanjiGame() {
+            if(!optionsContainer || !feedback || !kanjiDisplay) return;
+            optionsContainer.innerHTML = '';
+            feedback.textContent = '';
+            feedback.classList.remove('text-green-400', 'text-red-400');
+
+            let newKanji = currentKanji;
+            while (newKanji === currentKanji) {
+                newKanji = kanjiGameData[Math.floor(Math.random() * kanjiGameData.length)];
+            }
+            currentKanji = newKanji;
+            kanjiDisplay.textContent = currentKanji.kanji;
+
+            const options = [currentKanji.meaning];
+            const allMeanings = kanjiGameData.map(k => k.meaning);
+
+            while (options.length < 4) {
+                const randomMeaning = allMeanings[Math.floor(Math.random() * allMeanings.length)];
+                if (!options.includes(randomMeaning)) {
+                    options.push(randomMeaning);
+                }
+            }
+            shuffleArray(options);
+
+            options.forEach(option => {
+                const button = document.createElement('button');
+                button.textContent = option;
+                button.onclick = () => checkAnswer(option, button);
+                optionsContainer.appendChild(button);
+            });
+        }
+
+        function checkAnswer(selectedMeaning, button) {
+            const allButtons = optionsContainer.querySelectorAll('button');
+            allButtons.forEach(btn => btn.disabled = true);
+
+            if (selectedMeaning === currentKanji.meaning) {
+                feedback.textContent = 'Correct!';
+                feedback.className = 'text-center mt-4 text-lg md:text-xl font-semibold text-green-400 h-8';
+                button.classList.add('correct');
+            } else {
+                feedback.textContent = `Not quite! It means "${currentKanji.meaning}".`;
+                feedback.className = 'text-center mt-4 text-lg md:text-xl font-semibold text-red-400 h-8';
+                button.classList.add('incorrect');
+                allButtons.forEach(btn => {
+                    if(btn.textContent === currentKanji.meaning){
+                        btn.classList.add('correct');
+                    }
+                })
+            }
+            setTimeout(setupKanjiGame, 2000);
+        }
+        
+        // --- Gemini API Integration ---
+        const API_KEY = "AIzaSyBlj20zD_hpfTEiq8tSsPNgeYo6nMUY9Fo"; // Kept empty as per instructions
+        const API_URL = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=${API_KEY}`;
+        
+        async function callGemini(prompt) {
+             const payload = {
+                contents: [{ parts: [{ text: prompt }] }]
+            };
+
+            try {
+                const response = await fetch(API_URL, {
+                    method: 'POST',
+                    headers: {'Content-Type': 'application/json'},
+                    body: JSON.stringify(payload)
+                });
+
+                if (!response.ok) throw new Error(`API Error: ${response.statusText}`);
+                const result = await response.json();
+                if (result.candidates && result.candidates[0]?.content?.parts[0]?.text) {
+                    return result.candidates[0].content.parts[0].text;
+                } else {
+                    return "Sorry, I couldn't generate a response. Please try again.";
+                }
+            } catch (error) {
+                console.error("Gemini API call failed:", error);
+                return "An error occurred while contacting the AI. Check the console for details.";
+            }
+        }
+
+        const funFactBtn = document.getElementById('fun-fact-button');
+        const funFactLoader = document.getElementById('fun-fact-loader');
+        const funFactContent = document.getElementById('fun-fact-content');
+
+        async function generateFunFact() {
+            funFactBtn.disabled = true;
+            funFactLoader.classList.remove('hidden');
+            funFactContent.innerHTML = `<p class="text-gray-400">Generating a new fact...</p>`;
+            const prompt = "Tell me an interesting and concise fun fact about Japanese culture, language, or daily life. Something unique that most people might not know. Don't repeat the one about 'tsuki ga kirei desu ne'.";
+            const newFact = await callGemini(prompt);
+            funFactContent.innerHTML = `<p class="text-gray-300">${newFact}</p>`;
+            funFactBtn.disabled = false;
+            funFactLoader.classList.add('hidden');
+        }
+
+        const gameIdeaBtn = document.getElementById('game-idea-button');
+        const gameIdeaLoader = document.getElementById('game-idea-loader');
+        const gameIdeaOutput = document.getElementById('game-idea-output');
+
+        async function generateGameIdea() {
+            gameIdeaBtn.disabled = true;
+            gameIdeaLoader.classList.remove('hidden');
+            gameIdeaOutput.innerHTML = `<p class="text-gray-400">Coming up with a game idea...</p>`;
+            const prompt = "Brainstorm a creative video game idea. Provide a title and a one-sentence concept. Format it as: **Title:** [Your Title] \n **Concept:** [Your Concept]";
+            const newIdea = await callGemini(prompt);
+            gameIdeaOutput.innerHTML = `<p class="text-white">${newIdea.replace(/\*\*/g, '<strong class="text-purple-300">').replace(/\n/g, '<br>')}</p>`;
+            gameIdeaBtn.disabled = false;
+            gameIdeaLoader.classList.add('hidden');
+        }
+
+        const hackathonIdeaBtn = document.getElementById('hackathon-idea-button');
+        const hackathonIdeaLoader = document.getElementById('hackathon-idea-loader');
+        const hackathonIdeaOutput = document.getElementById('hackathon-idea-output');
+        const hackathonThemeInput = document.getElementById('hackathon-theme');
+
+        async function generateHackathonIdea() {
+            const theme = hackathonThemeInput.value.trim() || 'sustainability';
+            hackathonIdeaBtn.disabled = true;
+            hackathonIdeaLoader.classList.remove('hidden');
+            hackathonIdeaOutput.innerHTML = `<p class="text-gray-400">Brainstorming ideas for the theme: ${theme}...</p>`;
+            const prompt = `Generate three creative hackathon project ideas based on the theme of "${theme}". For each idea, provide a catchy name and a one-sentence description. Format it as a numbered list.`;
+            const newIdeas = await callGemini(prompt);
+            hackathonIdeaOutput.innerHTML = `<p class="text-white">${newIdeas}</p>`;
+            hackathonIdeaBtn.disabled = false;
+            hackathonIdeaLoader.classList.add('hidden');
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            showPage('summary');
+            if (document.getElementById('kanji-display')) {
+                setupKanjiGame();
+            }
+        });
+
+        const style = document.createElement('style');
+        style.innerHTML = `
+            @keyframes fade-in {
+                from { opacity: 0; transform: translateY(10px); }
+                to { opacity: 1; transform: translateY(0); }
+            }
+            .animate-fade-in {
+                animation: fade-in 0.5s ease-out forwards;
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
